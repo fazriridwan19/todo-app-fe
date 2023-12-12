@@ -6,7 +6,6 @@ const FormTodoUpdate = ({
   todoToUpdate,
   updateTodo,
   closeModal,
-  reload,
   categories,
 }) => {
   const [todo, setTodo] = useState(todoToUpdate);
@@ -20,12 +19,6 @@ const FormTodoUpdate = ({
           title: "Task updated",
           text: "You clicked the button!",
           icon: "success",
-        }).then(async () => {
-          try {
-            await reload();
-          } catch (error) {
-            console.log(error);
-          }
         });
       })
       .catch((err) => {
@@ -77,7 +70,6 @@ const FormTodoUpdate = ({
         aria-label="Default select example"
         onChange={(e) => setTodo({ ...todo, isDone: e.target.value })}
       >
-        <option>Condition</option>
         <option selected={todo.isDone} value={true}>
           Finish
         </option>

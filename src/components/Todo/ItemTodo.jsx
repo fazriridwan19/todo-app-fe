@@ -2,14 +2,7 @@ import React, { useState } from "react";
 import { Button, Row, Col } from "react-bootstrap";
 import ModalFormUpdate from "../modals/ModalFormUpdate";
 
-const ItemTodo = ({
-  todo,
-  markTodo,
-  deleteTask,
-  reload,
-  updateTodo,
-  categories,
-}) => {
+const ItemTodo = ({ todo, markTodo, deleteTask, updateTodo, categories }) => {
   const [modalShow, setModalShow] = useState(false);
   let bgBadge;
   if (todo.priority.name === "high") {
@@ -23,7 +16,6 @@ const ItemTodo = ({
     try {
       todo.isDone = true;
       await markTodo(id, todo);
-      await reload();
     } catch (error) {
       console.log(error);
     }
@@ -31,7 +23,6 @@ const ItemTodo = ({
   const handleDelete = async (id) => {
     try {
       await deleteTask(id);
-      await reload();
     } catch (error) {
       console.log(error);
     }
@@ -67,7 +58,6 @@ const ItemTodo = ({
             show={modalShow}
             onHide={() => setModalShow(false)}
             updateTodo={updateTodo}
-            reload={reload}
             todo={todo}
             categories={categories}
           />

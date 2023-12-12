@@ -2,10 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import Swal from "sweetalert2";
 
-const FormTodo = ({ addTodo, closeModal, reload, categories }) => {
+const FormTodo = ({ addTodo, closeModal, categories }) => {
   const [todo, setTodo] = useState({
     text: "",
     priority: {
+      id: null,
+      name: "",
+    },
+    category: {
       id: null,
       name: "",
     },
@@ -14,24 +18,14 @@ const FormTodo = ({ addTodo, closeModal, reload, categories }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!todo) return;
-    addTodo(todo)
-      .then(() => {
-        closeModal();
-        Swal.fire({
-          title: "Task added",
-          text: "You clicked the button!",
-          icon: "success",
-        }).then(async () => {
-          try {
-            await reload();
-          } catch (error) {
-            console.log(error);
-          }
-        });
-      })
-      .catch((err) => {
-        console.log(err);
+    addTodo(todo).then(() => {
+      closeModal();
+      Swal.fire({
+        title: "Task added",
+        text: "You clicked the button!",
+        icon: "success",
       });
+    });
   };
   useEffect(() => {}, []);
   return (
@@ -42,12 +36,14 @@ const FormTodo = ({ addTodo, closeModal, reload, categories }) => {
         </Form.Label>
       </Form.Group>
       <Form.Control
+        required
         type="text"
         className="input"
         placeholder="Add new task"
         onChange={(e) => setTodo({ ...todo, text: e.target.value })}
       />
       <Form.Select
+        required
         aria-label="Default select example"
         onChange={(e) => setTodo({ ...todo, priority: { id: e.target.value } })}
       >
@@ -57,6 +53,7 @@ const FormTodo = ({ addTodo, closeModal, reload, categories }) => {
         <option value="3">High</option>
       </Form.Select>
       <Form.Select
+        required
         aria-label="Default select example"
         onChange={(e) => setTodo({ ...todo, category: { id: e.target.value } })}
       >

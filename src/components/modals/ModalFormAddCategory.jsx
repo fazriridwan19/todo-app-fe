@@ -1,8 +1,8 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
-import FormTodoUpdate from "../Todo/FormTodoUpdate";
+import FormCategory from "../Category/FormCategory";
 
-const ModalFormUpdate = (props) => {
+const ModalFormAddCategory = (props) => {
   return (
     <Modal
       show={props.show}
@@ -12,14 +12,14 @@ const ModalFormUpdate = (props) => {
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">Form task</Modal.Title>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Form Add Category
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <FormTodoUpdate
-          updateTodo={props.updateTodo}
+        <FormCategory
+          addCategory={props.addCategory}
           closeModal={props.onHide}
-          todoToUpdate={props.todo}
-          categories={props.categories}
         />
       </Modal.Body>
       <Modal.Footer>
@@ -29,4 +29,4 @@ const ModalFormUpdate = (props) => {
   );
 };
 
-export default ModalFormUpdate;
+export default ModalFormAddCategory;

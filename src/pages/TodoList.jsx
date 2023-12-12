@@ -19,15 +19,6 @@ const TodoList = () => {
     }
   };
 
-  const getPriorities = async () => {
-    try {
-      const { data } = await categoryService.getCategories();
-      setCategories(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const getData = async () => {
     try {
       const { data } = await service.getTasks();
@@ -38,15 +29,30 @@ const TodoList = () => {
   };
 
   const addTodo = async (todo) => {
-    return await service.createTask(todo);
+    try {
+      const { data } = await service.createTask(todo);
+      setTodos([...todos, data]);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const updateTodo = async (id, todo) => {
-    return await service.updateTask(id, todo);
+    try {
+      await service.updateTask(id, todo);
+      getData();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const deleteTask = async (id) => {
-    return await service.deleteTask(id);
+    try {
+      await service.deleteTask(id);
+      getData();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
