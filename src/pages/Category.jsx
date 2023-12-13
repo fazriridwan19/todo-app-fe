@@ -43,8 +43,8 @@ const Category = () => {
     getCategories();
   }, []);
   return (
-    <Container className="mt-5 w-50">
-      <h1 className="text-center mb-4">List Category</h1>
+    <Container className="mt-2 w-80">
+      <h1 className="text-center mb-2">List Category</h1>
       <div className="d-flex justify-content-end mb-2">
         <Button variant="primary" onClick={() => setModalShow(true)}>
           Add category

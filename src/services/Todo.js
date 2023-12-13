@@ -4,8 +4,12 @@ const createTask = async (todo) => {
   return await axios.post(`http://localhost:8080/api/v1/tasks`, todo);
 };
 
-const getTasks = async () => {
-  return await axios.get(`http://localhost:8080/api/v1/tasks`);
+const getTasks = async (criteria) => {
+  return await axios.get(`http://localhost:8080/api/v1/tasks`, {
+    params: {
+      ...criteria,
+    },
+  });
 };
 
 const getTaskById = async (id) => {
